@@ -137,7 +137,7 @@ async function refreshState() {
       if (!msg) {
         return;
       }
-      winston.info('Update received for sensor ' + msg.attributes.friendly_name + '(' + msg.attributes.serial_number + ')');
+      winston.info('Update received for ' + msg.attributes.friendly_name + ' (' + msg.attributes.serial_number + ')');
       const conf = {
         headers: {
             'x-ha-access': process.env.HASSIO_TOKEN,
