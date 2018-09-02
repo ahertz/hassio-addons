@@ -2,4 +2,4 @@
 
 ## [Kuna](https://github.com/HITChris/hassio-addons/tree/master/Kuna)
 
-Motion sensor monitoring using [Kuna](https://getkuna.com) camera service
+Motion sensor monitoring via the [Kuna](https://getkuna.com) outdoor camera platform
