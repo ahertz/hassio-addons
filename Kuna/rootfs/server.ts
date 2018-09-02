@@ -201,12 +201,7 @@ async.series([
     });
   },
   function configurePolling(next) {
-    const interval = 1;
-    if (config.refresh_seconds >= 15) {
-      const interval = 1000 * config.refresh_seconds;
-    } else {
-      const interval = 1000 * 15;
-    }
+    const interval = 1000 * config.refresh_seconds;
     winston.info(`Polling interval set at ${config.refresh_seconds} seconds`);
     
     setInterval(refreshState, interval);
