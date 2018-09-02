@@ -10,9 +10,9 @@
   "hassio_api": false,
   "homeassistant_api":true,
   "options": {
-    "refresh_seconds": 1,
-    "kuna_email": "",
-    "kuna_password": ""
+    "refresh_seconds": 15,
+    "kuna_email": "MyKunaEmailAddress",
+    "kuna_password": "MyKunaPassword"
   },
   "schema": {
     "kuna_email": "str",

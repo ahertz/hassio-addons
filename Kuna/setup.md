@@ -7,19 +7,17 @@
 | kuna_password      | Kuna password                                    |
 | refresh_seconds    | Polling interval between updates (15 or greater) |
 
-## Config Examles
-
-### Kuna addon options
+## Config Example
 
 ```json
 {
     "kuna_email": "MyKunaEmailAddress",
     "kuna_password": "MyKunaPassword",
-    "refresh_seconds": 5
+    "refresh_seconds": 15
 }
 ```
 
-## Message Body
+## Sensor Payload
 
 ``` json
 {
