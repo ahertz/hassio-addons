@@ -10,4 +10,4 @@ env:
 script:
   - docker login -u $DOCKER_USER -p $DOCKER_PWD
   # - ./build.sh $ADDON
-  - docker run --rm --privileged -v ~/.docker:/root/.docker homeassistant/amd64-builder --addon --all -t $ADDON -r https://github.com/hitchris/hassio-addons -b master -d hitchris
+  - docker run --rm --privileged -v ~/.docker:/root/.docker homeassistant/amd64-builder --addon --all -t $ADDON -r https://github.com/HITChris/hassio-addons -b master -d HITChris

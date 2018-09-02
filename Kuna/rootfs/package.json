@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "main": "server.js",
-  "repository": "https://github.com/hitchris/hassio-addons/tree/master/kuna",
+  "repository": "https://github.com/HITChris/hassio-addons/tree/master/Kuna",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc && node server.js",

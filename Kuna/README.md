@@ -1,4 +1,4 @@
-# Home Assistant - Kuna addon
+# Hassio Addons - Kuna
 
 HASSIO addon to pull status information from Kuna cameras
 
@@ -6,7 +6,7 @@ HASSIO addon to pull status information from Kuna cameras
 
 TBD
 
-To view additional options see [setup.md](https://github.com/hitchris/hassio-addons/blob/master/kuna/setup.md) file
+To view additional options see [setup.md](https://github.com/HITChris/hassio-addons/blob/master/Kuna/setup.md) file
 
 ## Releases
 

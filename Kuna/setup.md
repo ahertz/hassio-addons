@@ -1,11 +1,11 @@
 
 ## Config Parameters
 
-| Param              | Description                                                                                                                           |
-|--------------------|---------------------------------------------------------------------------------------------------------------------------------------|                                                                                                                  |
-| kuna_email       | Kuna email address                                                                                                                      |
-| kuna_password   | Kuna password                                                                                                                      |
-| refresh_seconds    | Polling interval between updates (5 or greater) |
+| Param              | Description                                      |
+|--------------------|--------------------------------------------------|
+| kuna_email         | Kuna email address                               |
+| kuna_password      | Kuna password                                    |
+| refresh_seconds    | Polling interval between updates (15 or greater) |
 
 ## Config Examles
 
