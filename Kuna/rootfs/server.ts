@@ -144,7 +144,7 @@ async function refreshState() {
             'content-type': 'application/json'
         }
       };
-      Axios.post('http://hassio/homeassistant/api/states/sensor.' + msg.attributes.name, msg, conf).catch(err => winston.error(err));
+      Axios.post('http://hassio/homeassistant/api/states/sensor.' + msg.attributes.name.replace(" ", "_"), msg, conf).catch(err => winston.error(err));
     });
     
     } catch (err) {
