@@ -14,6 +14,10 @@ For the config options, see [setup.md](https://github.com/HITChris/hassio-addons
 
 ## Releases
 
+### 0.0.2
+
+- Entity creation should correctly reflect camera name
+
 ### 0.0.1
 
-- Release.
+- Release
