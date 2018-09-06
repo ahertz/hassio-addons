@@ -9,7 +9,7 @@ import * as winston from 'winston';
 import * as async from 'async';
 import * as jsonfile from 'jsonfile';
 import * as path from 'path';
-import FormData from 'form-data';
+import * as FormData from 'form-data';
 import Axios from 'axios';
 import { Response, Request, NextFunction, json } from 'express';
 import { v4 } from 'uuid';
@@ -152,7 +152,7 @@ async function refreshState() {
             Authorization: state.saved_token || 'un-auth-request'
           }
         };
-        const imageData = new FormData();
+        var imageData = new FormData();
         imageData.append('image', Axios.get(`${baseUrl}/cameras/${msg.attributes.serial_number}/thumbnail/`, headersKS).catch(err => winston.error(err)));
         Axios.post('http://hassio/homeassistant/api/camera_push/camera.' + msg.attributes.name.toLowerCase().replace(" ", "_"), imageData, headersHA).catch(err => winston.error(err));
 	  }
