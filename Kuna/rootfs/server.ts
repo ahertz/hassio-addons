@@ -151,7 +151,10 @@ async function refreshState() {
             Authorization: state.saved_token || 'un-auth-request'
           }
         };
-        Axios.post('http://hassio/homeassistant/api/camera_push/camera.' + msg.attributes.name.toLowerCase().replace(" ", "_"), Axios.get(`${baseUrl}/cameras/${msg.attributes.serial_number}/thumbnail/`, headersKS), headersHA).catch(err => winston.error(err));
+        const imageResponse = await Axios.get(`${baseUrl}/cameras/${msg.attributes.serial_number}/thumbnail/`, headersKS).catch(err => winston.error(err));
+        let imageData = new FormData();
+        imageData.append('image', imageResponse);
+        Axios.post('http://hassio/homeassistant/api/camera_push/camera.' + msg.attributes.name.toLowerCase().replace(" ", "_"), imageData, headersHA).catch(err => winston.error(err));
 	  }
     });
     } catch (err) {
