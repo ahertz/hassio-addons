@@ -20,7 +20,7 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "express-winston": "^2.4.0",
-    "form-data": "^2.3.2",
+    "form-data": "^2.3.0",
     "uuid": "^3.1.0",
     "jsonfile": "^4.0.0",
     "winston": "^2.4.0"
@@ -32,7 +32,6 @@
     "@types/node": "^8.5.1",
     "@types/uuid": "^3.4.3",
     "@types/winston": "^2.3.7",
-    "@types/form-data": "^2.2.1",
     "tslint": "^5.8.0",
     "typescript": "^2.7.2"
   }
