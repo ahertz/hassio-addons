@@ -22,7 +22,7 @@ config = jsonfile.readFileSync(OPTIONS_FILE) as {
   kuna_email: string;
   kuna_password: string;
   refresh_seconds: number;
-  api_password: string;
+  save_thumbnail: string;
 },
 state = loadSavedState({
   saved_token: null as string | null,
@@ -64,7 +64,7 @@ function loadSavedState<T>(defaults: T): T {
 }
 
 async function refreshToken() {
-  const headers = {
+  const headersKS = {
     headers: {
       Authorization: 'Token '
     }
@@ -73,17 +73,17 @@ async function refreshToken() {
     grant_type: 'password',
     email: config.kuna_email,
     password: config.kuna_password
-  }, headers);
+  }, headersKS);
   winston.info('login = ' + config.kuna_email + ' ' + config.kuna_password);
   if (authResponse.data.token) {
     state.saved_token = 'Token ' + authResponse.data.token;
     } else {
     throw Error('No API token was returned.');
   }
-  headers.headers = {
+  headersKS.headers = {
     Authorization: state.saved_token
   };
-  const resultsResponse = await Axios.get<ResultsRequest>(`${baseUrl}/user/cameras/`, headers);
+  const resultsResponse = await Axios.get<ResultsRequest>(`${baseUrl}/user/cameras/`, headersKS);
   if (Array.isArray(resultsResponse.data.results)) {
     state.results = [];
     resultsResponse.data.results.forEach(cam => {
@@ -137,16 +137,23 @@ async function refreshState() {
       if (!msg) {
         return;
       }
-      winston.info('Update received for ' + msg.attributes.friendly_name + ' (' + msg.attributes.serial_number + ')');
-      const conf = {
+      winston.info('Update pulled for ' + msg.attributes.friendly_name + ' (' + msg.attributes.serial_number + ')');
+      const headersHA = {
         headers: {
             'x-ha-access': process.env.HASSIO_TOKEN,
             'content-type': 'application/json'
         }
       };
-      Axios.post('http://hassio/homeassistant/api/states/sensor.' + msg.attributes.name.replace(" ", "_"), msg, conf).catch(err => winston.error(err));
+      Axios.post('http://hassio/homeassistant/api/states/sensor.' + msg.attributes.name.replace(" ", "_"), msg, headersHA).catch(err => winston.error(err));
+	  if (config.save_thumbnail === 'true') {
+        const headersKS = {
+          headers: {
+            Authorization: state.saved_token || 'un-auth-request'
+          }
+        };
+        Axios.post('http://hassio/homeassistant/api/camera_push/camera.' + msg.attributes.name.replace(" ", "_"), Axios.get(`${baseUrl}/cameras/${msg.attributes.serial_number}/thumbnail/`, headersKS), headersHA).catch(err => winston.error(err));
+	  }
     });
-    
     } catch (err) {
     winston.error(err);
   }
@@ -158,14 +165,14 @@ async function getData() {
   }
   
   return new Promise<CamerasRequest[]>((accept, reject) => {
-    const headers = {
+    const headersKS = {
       headers: {
         Authorization: state.saved_token || 'un-auth-request'
       }
     };
     const details: CamerasRequest[] = [];
     async.forEach(state.results, (cam, callback) => {
-      Axios.get<CamerasRequest>(`${baseUrl}/cameras/${cam.serial_number}/`, headers)
+      Axios.get<CamerasRequest>(`${baseUrl}/cameras/${cam.serial_number}/`, headersKS)
       .then(camerasResponse => {
         details.push(camerasResponse.data);
         callback();

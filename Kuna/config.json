@@ -1,6 +1,6 @@
 {
   "name": "Kuna",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "slug": "kuna",
   "description": "HASSIO addon to pull status information from Kuna cameras",
   "url": "https://github.com/HITChris/hassio-addons/tree/master/Kuna",
@@ -10,13 +10,15 @@
   "hassio_api": false,
   "homeassistant_api":true,
   "options": {
-    "refresh_seconds": 15,
     "kuna_email": "MyKunaEmailAddress",
-    "kuna_password": "MyKunaPassword"
+    "kuna_password": "MyKunaPassword",
+    "refresh_seconds": 15,
+    "save_thumbnail": "false"
   },
   "schema": {
     "kuna_email": "str",
     "kuna_password": "str",
-    "refresh_seconds": "int"
+    "refresh_seconds": "int",
+    "save_thumbnail": "str"
   }
 }
