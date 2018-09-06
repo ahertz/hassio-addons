@@ -9,6 +9,7 @@ import * as winston from 'winston';
 import * as async from 'async';
 import * as jsonfile from 'jsonfile';
 import * as path from 'path';
+import * as path from 'form-data';
 import Axios from 'axios';
 import { Response, Request, NextFunction, json } from 'express';
 import { v4 } from 'uuid';
