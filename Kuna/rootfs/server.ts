@@ -144,14 +144,14 @@ async function refreshState() {
             'content-type': 'application/json'
         }
       };
-      Axios.post('http://hassio/homeassistant/api/states/sensor.' + msg.attributes.name.replace(" ", "_"), msg, headersHA).catch(err => winston.error(err));
+      Axios.post('http://hassio/homeassistant/api/states/sensor.' + msg.attributes.name.toLowerCase().replace(" ", "_"), msg, headersHA).catch(err => winston.error(err));
 	  if (config.save_thumbnail === 'true') {
         const headersKS = {
           headers: {
             Authorization: state.saved_token || 'un-auth-request'
           }
         };
-        Axios.post('http://hassio/homeassistant/api/camera_push/camera.' + msg.attributes.name.replace(" ", "_"), Axios.get(`${baseUrl}/cameras/${msg.attributes.serial_number}/thumbnail/`, headersKS), headersHA).catch(err => winston.error(err));
+        Axios.post('http://hassio/homeassistant/api/camera_push/camera.' + msg.attributes.name.toLowerCase().replace(" ", "_"), Axios.get(`${baseUrl}/cameras/${msg.attributes.serial_number}/thumbnail/`, headersKS), headersHA).catch(err => winston.error(err));
 	  }
     });
     } catch (err) {

@@ -20,7 +20,7 @@
     "kuna_email": "MyKunaEmailAddress",
     "kuna_password": "MyKunaPassword",
     "refresh_seconds": 15,
-	"save_thumbnail": "true"
+    "save_thumbnail": "true"
 }
 ```
 
@@ -29,7 +29,7 @@
 ```yaml
 camera:
   - platform: push
-	  name: MyKunaCameraName
+      name: MyKunaCameraName
 ```
 
 ## Sensor Payload
