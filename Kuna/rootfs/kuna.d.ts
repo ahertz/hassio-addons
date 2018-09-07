@@ -1,12 +1,12 @@
 import { Request } from 'express';
 
+export interface TokenRequest {
+  token: string;
+}
+
 export interface Result {
   id: string;
   serial_number: string;
-}
-
-export interface TokenRequest {
-  token: string;
 }
 
 export interface ResultsRequest {
@@ -28,4 +28,8 @@ export interface CamerasRequest {
   motion_timeout: string;
   recording_active: string;
   brightness: string
+}
+
+export interface ImageRequest {
+  image: string;
 }

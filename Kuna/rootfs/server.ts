@@ -3,7 +3,7 @@
   * @file HASSIO addon to pull status information from Kuna cameras.
 */
 
-import { Result, ResultsRequest, CamerasRequest, TokenRequest } from './kuna';
+import { TokenRequest, Result, ResultsRequest, CamerasRequest, ImageRequest } from './kuna';
 
 import * as winston from 'winston';
 import * as async from 'async';
@@ -92,7 +92,6 @@ async function refreshToken() {
         id: cam.id,
         serial_number: cam.serial_number
       });
-      
     });
     } else {
     winston.warn('No Kuna cameras were returned by the request.');
@@ -126,7 +125,6 @@ function formatInfo(input: CamerasRequest) {
 }
 
 async function refreshState() {
-  
   try {
     state.cameras = await getData();
     const data = state.cameras.map(x => formatInfo(x));
@@ -134,7 +132,7 @@ async function refreshState() {
     jsonfile.writeFileSync(STATE_FILE, state, {
       spaces: 2
     });
-    data.forEach(msg => {
+    data.forEach(async msg => {
       if (!msg) {
         return;
       }
@@ -146,16 +144,18 @@ async function refreshState() {
         }
       };
       Axios.post('http://hassio/homeassistant/api/states/sensor.' + msg.attributes.name.toLowerCase().replace(" ", "_"), msg, headersHA).catch(err => winston.error(err));
-	  if (config.save_thumbnail === 'true') {
+      if (config.save_thumbnail === 'true') {
         const headersKS = {
           headers: {
             Authorization: state.saved_token || 'un-auth-request'
           }
         };
         var imageData = new FormData();
-        imageData.append('image', Axios.get(`${baseUrl}/cameras/${msg.attributes.serial_number}/thumbnail/`, headersKS).catch(err => winston.error(err)));
-        Axios.post('http://hassio/homeassistant/api/camera_push/camera.' + msg.attributes.name.toLowerCase().replace(" ", "_"), imageData, headersHA).catch(err => winston.error(err));
-	  }
+        const imageResponse = await Axios.get(`${baseUrl}/cameras/${msg.attributes.serial_number}/thumbnail/`, headersKS).catch(err => winston.error(err));
+        winston.info(imageResponse.data.image);
+        /** imageData.append('image', Axios.get(`${baseUrl}/cameras/${msg.attributes.serial_number}/thumbnail/`, headersKS).catch(err => winston.error(err))); */
+        /** Axios.post('http://hassio/homeassistant/api/camera_push/camera.' + msg.attributes.name.toLowerCase().replace(" ", "_"), imageData, headersHA).catch(err => winston.error(err)); */
+      }
     });
     } catch (err) {
     winston.error(err);
@@ -166,7 +166,6 @@ async function getData() {
   if (!state.saved_token) {
     await refreshToken();
   }
-  
   return new Promise<CamerasRequest[]>((accept, reject) => {
     const headersKS = {
       headers: {
@@ -192,7 +191,6 @@ async function getData() {
         
         } else {
         accept(details);
-        
       }
     });
   });
@@ -203,30 +201,24 @@ async.series([
     refreshToken().then(() => {
       winston.info('Kuna API token refreshed.');
       next();
-      
       }).catch(err => {
       winston.error('Error obtaining an updated API token from Kuna.');
       next(err);
-      
     });
   },
   function configurePolling(next) {
     const interval = 1000 * config.refresh_seconds;
     winston.info(`Polling interval set at ${config.refresh_seconds} seconds`);
-    
     setInterval(refreshState, interval);
     refreshState().then(x => {
       state.cameras.forEach((camera, i, arr) => {
         winston.info(`Camera ${i + 1} of ${arr.length}: ${camera.serial_number}`);
       });
-      
       state.cameras.forEach((result, i, arr) => {
         const camerasData = formatInfo(result);
         winston.info(`Camera ${i + 1} of ${arr.length}\n ID: ${result.serial_number}; Data: ${JSON.stringify(camerasData, null, 4)} `);
-        
       });
     });
-    
     process.nextTick(next);
   }
   ], (error) => {

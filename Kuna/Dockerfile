@@ -2,7 +2,6 @@ ARG BUILD_FROM=hassioaddons/base:2.1.2
 FROM $BUILD_FROM
 
 ENV CONFIG_DIR=/data
-ENV IS_PROD=true
 
 WORKDIR /Kuna
 COPY rootfs /Kuna
@@ -13,7 +12,6 @@ RUN apk add --no-cache \
 RUN npm install
 RUN npm run build
 
-
 RUN chmod a+x /Kuna/usr/bin/run.sh
 
 # Run the service
@@ -21,12 +19,12 @@ CMD ["/Kuna/usr/bin/run.sh"]
 
 LABEL \
     io.hass.name="Kuna" \
-    io.hass.description="HASSIO addon to pull status information from Kuna cameras." \
+    io.hass.description="HASSIO addon to pull images and status information from Kuna cameras" \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
     maintainer="Chris" \
-    org.label-schema.description="HASSIO addon to pull status information from Kuna cameras." \
+    org.label-schema.description="HASSIO addon to pull images and status information from Kuna cameras" \
     org.label-schema.build-date=${BUILD_DATE} \
     org.label-schema.name="Kuna" \
     org.label-schema.schema-version="1.0" \
