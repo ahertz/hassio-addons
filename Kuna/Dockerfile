@@ -3,8 +3,8 @@ FROM $BUILD_FROM
 
 ENV CONFIG_DIR=/data
 
-WORKDIR /Kuna
-COPY rootfs /Kuna
+WORKDIR /kuna
+COPY rootfs /kuna
 
 RUN apk add --no-cache \
     nodejs=8.11.4-r0 \
