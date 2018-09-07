@@ -12,10 +12,10 @@ RUN apk add --no-cache \
 RUN npm install
 RUN npm run build
 
-RUN chmod a+x /Kuna/usr/bin/run.sh
+RUN chmod a+x /kuna/usr/bin/run.sh
 
 # Run the service
-CMD ["/Kuna/usr/bin/run.sh"]
+CMD ["/kuna/usr/bin/run.sh"]
 
 LABEL \
     io.hass.name="Kuna" \
