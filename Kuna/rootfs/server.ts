@@ -3,7 +3,7 @@
   * @file HASSIO addon to pull status information from Kuna cameras.
 */
 
-import { TokenRequest, Result, ResultsRequest, CamerasRequest, ImageRequest } from './kuna';
+import { TokenRequest, Result, ResultsRequest, CamerasRequest, ImageRequest } from './Kuna';
 
 import * as winston from 'winston';
 import * as async from 'async';

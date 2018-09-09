@@ -3,8 +3,8 @@ FROM $BUILD_FROM
 
 ENV CONFIG_DIR=/data
 
-WORKDIR /kuna
-COPY rootfs /kuna
+WORKDIR /Kuna
+COPY rootfs /Kuna
 
 RUN apk add --no-cache \
     nodejs=8.11.4-r0 \
@@ -12,10 +12,10 @@ RUN apk add --no-cache \
 RUN npm install
 RUN npm run build
 
-RUN chmod a+x /kuna/usr/bin/run.sh
+RUN chmod a+x /Kuna/usr/bin/run.sh
 
 # Run the service
-CMD ["/kuna/usr/bin/run.sh"]
+CMD ["/Kuna/usr/bin/run.sh"]
 
 LABEL \
     io.hass.name="Kuna" \
