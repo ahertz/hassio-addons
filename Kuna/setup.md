@@ -19,7 +19,7 @@
 {
     "kuna_email": "MyKunaEmailAddress",
     "kuna_password": "MyKunaPassword",
-    "refresh_seconds": 15,
+    "refresh_seconds": 10,
     "save_thumbnail": "true"
 }
 ```

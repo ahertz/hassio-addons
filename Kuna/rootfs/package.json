@@ -1,6 +1,6 @@
 {
   "name": "Kuna-addon",
-  "version": "0.0.4",
+  "version": "0.0.3",
   "description": "",
   "main": "server.js",
   "repository": "https://github.com/HITChris/hassio-addons/tree/master/Kuna",
