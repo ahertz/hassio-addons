@@ -9,7 +9,6 @@
   "host_network": false,
   "hassio_api": false,
   "homeassistant_api":true,
-  "image": "hitchris/kuna-{arch}",
   "options": {
     "kuna_email": "MyKunaEmailAddress",
     "kuna_password": "MyKunaPassword",
