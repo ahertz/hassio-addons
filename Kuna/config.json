@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "slug": "kuna",
   "description": "HASSIO addon to pull images and status information from Kuna cameras",
-  "url": "https://github.com/HITChris/hassio-addons/tree/master/Kuna",
+  "url": "https://github.com/ahertz/hassio-addons/tree/master/Kuna",
   "startup": "application",
   "boot": "auto",
   "host_network": false,
