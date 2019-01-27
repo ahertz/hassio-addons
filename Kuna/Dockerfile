@@ -7,8 +7,8 @@ WORKDIR /Kuna
 COPY rootfs /Kuna
 
 RUN apk add --no-cache \
-    nodejs=8.11.4-r0 \
-    npm=8.11.4-r0
+    nodejs=8.14.0-r0 \
+    npm=8.10.0-r0
 RUN npm install
 RUN npm run build
 
