@@ -153,8 +153,8 @@ async function refreshState() {
         var imageData = new FormData();
         const imageResponse = await Axios.get(`${baseUrl}/cameras/${msg.attributes.serial_number}/thumbnail/`, headersKS).catch(err => winston.error(err));
         winston.info(imageResponse.data.image);
-        /** imageData.append('image', Axios.get(`${baseUrl}/cameras/${msg.attributes.serial_number}/thumbnail/`, headersKS).catch(err => winston.error(err))); */
-        /** Axios.post('http://hassio/homeassistant/api/camera_push/camera.' + msg.attributes.name.toLowerCase().replace(" ", "_"), imageData, headersHA).catch(err => winston.error(err)); */
+        imageData.append('image', Axios.get(`${baseUrl}/cameras/${msg.attributes.serial_number}/thumbnail/`, headersKS).catch(err => winston.error(err)));
+        Axios.post('http://hassio/homeassistant/api/camera_push/camera.' + msg.attributes.name.toLowerCase().replace(" ", "_"), imageData, headersHA).catch(err => winston.error(err));
       }
     });
     } catch (err) {
