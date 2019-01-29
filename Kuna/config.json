@@ -1,6 +1,6 @@
 {
   "name": "Kuna",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "slug": "kuna",
   "description": "HASSIO addon to pull images and status information from Kuna cameras",
   "url": "https://github.com/ahertz/hassio-addons/tree/master/Kuna",
